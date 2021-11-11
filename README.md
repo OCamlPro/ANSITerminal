@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/Chris00/ANSITerminal.svg?branch=master)](https://travis-ci.org/Chris00/ANSITerminal)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/5nfvrcwa8s16j5a2?svg=true)](https://ci.appveyor.com/project/Chris00/ansiterminal)
+![Continuous Integration](https://github.com/Chris00/ANSITerminal/actions/workflows/main.yml/badge.svg)
 
 ANSITerminal
 ============
