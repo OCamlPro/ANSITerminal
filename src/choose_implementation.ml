@@ -5,14 +5,14 @@ open Printf
 
 let copy_file ?(line_directive=false) ?(dir=".") source target =
   let fh0 = open_in (Filename.concat dir source) in
-  let target = Filename.concat dir target in
-  (try Sys.remove target with _ -> ());
-  let fh1 = open_out_gen [Open_wronly; Open_creat; Open_trunc] 0o444 target in
-  let content = Buffer.create 4096 in
+  let fh1 = open_out_bin (Filename.concat dir target) in
   if line_directive then
-    bprintf content "#1 \"%s\"\n" (Filename.concat dir source);
-  Buffer.add_channel content fh0 (in_channel_length fh0);
-  Buffer.output_buffer fh1 content;
+    fprintf fh1 "#1 \"%s\"\n" (Filename.concat dir source);
+  let b = Bytes.create 4096 in
+  let n = ref 0 in
+  while n := input fh0 b 0 4096;  !n > 0 do
+    output fh1 b 0 !n
+  done;
   close_in fh0;
   close_out fh1
 
